@@ -1,0 +1,38 @@
+<div class="data-list">
+  <!--  search-->
+  <mat-form-field class="data-list--filter">
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+  </mat-form-field>
+
+  <!--  table of listing data-->
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" matSort class="data-list--table">
+
+      <!-- id Column -->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Id </th>
+        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+      </ng-container>
+
+      <!-- title Column -->
+      <ng-container matColumnDef="title">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Title </th>
+        <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+      </ng-container>
+
+      <!-- image Column -->
+      <ng-container matColumnDef="thumbnailUrl">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Image </th>
+        <td mat-cell *matCellDef="let element" class="data-list--table__image">
+          <img [src]="element.thumbnailUrl" alt="can't upload this image">
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <!-- pagination-->
+    <mat-paginator [pageSizeOptions]="[15, 25, 35]" showFirstLastButtons></mat-paginator>
+  </div>
+</div>
